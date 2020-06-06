@@ -1,0 +1,11 @@
+configuration {
+ modi: "window,drun,run,ssh,combi";
+ columns: 3;
+ lines: 40;
+ padding: 10;
+ show-icons:                     true;
+ icon-theme:                     "Tela-dark";
+ font:                           "Ubuntu 13";
+ combi-modi: "window,drun,ssh";
+ }
+@import "/home/sogilvy/.config/rofi/sidebar.rasi"

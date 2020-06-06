@@ -1,0 +1,133 @@
+## Conky by Ninquitassar (2012)
+##..: Conky status :..
+##
+  total_run_times 0                   #Time in seconds; 0 = ever
+  background no                       #No fork in background
+##
+##..: System Settings :..
+##
+  cpu_avg_samples 1                   #The number of samples to average for CPU monitoring
+  net_avg_samples 2                   #The number of samples to average for net data 
+##
+##..: Memory :..
+##
+  double_buffer yes                   #eliminates flicker
+  no_buffers yes                      #Subtract (file system) buffers from used memory?
+  text_buffer_size 1024               #Textual buffer memory
+##
+##..: Display :..
+  out_to_console no                   #Print text to stdout
+  update_interval 1                   #Update interval
+##
+##..: Conky Window :..
+##
+  alignment top_right                 #Alignement
+  #
+  minimum_size 350                    #Minimum width (px)
+  maximum_width 350                   #Maximun width (px)
+  #
+  gap_x -1                            #Gap between left/right border
+  gap_y 60                            #Gap between upper/lower border
+  #
+  draw_shades yes                      #Draw shadows?
+  draw_outline no                     #Draw outline?
+  draw_borders no                     #Borders to the text?
+  border_width 1                      #Width of borders
+  border_inner_margin 1               #Width of margins
+  #
+  own_window yes                      #Create own window to draw
+  own_window_type override            #Type of window
+  own_window_transparent yes          #Pseudo transparency
+##
+##..: Format :..
+##
+  use_xft yes                         #Use Xft
+  xftalpha .1                         #Alpha of Xft
+  override_utf8_locale yes            #UTF8 forcing
+  uppercase no                        #Only capital letters
+  use_spacer right                    #Adds spaces around certain objects to stop them from moving other things around
+  #
+  xftfont UbuntuMono Nerd Font Mono:size=10              #Default font
+  #
+  default_bar_size 82 3               #Specify a default width and height for bars
+  stippled_borders 3                  #Border dashing
+##
+##..: Colors :..
+##
+  default_color FFFFFF                #Default color
+  default_shade_color 333333          #Default color for shadows
+  default_outline_color black         #Default border color
+  #
+  color1 D6D6D6                       #Silver
+  color2 EFEFEF                       #Pearl white
+  color3 DAEAF2
+#   color3 A3ADB0                       #Grey
+##
+##..: Misc :..
+##
+  short_units yes                       #Shortens units to a single character
+  pad_percents 2                        #Number of decimals
+##
+##..: Clock and rings :..
+##-- SET TO YOUR PATH!!! --
+##
+  lua_load ~/.config/conky/lua/clock.lua
+  lua_draw_hook_pre clock_rings
+
+TEXT
+# ..: CLOCK & CALENDAR :..
+${color d7d7d7}${offset 56}${voffset -1}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+
+${voffset -33}${offset 152}${font neuropol:size=20}${time %H:%M}${font}  ${voffset -3}${font UbuntuMono-B:size=12}$uptime
+${voffset -5}${offset 124}${cpubar cpu6 0, 200}${voffset 2}${color1}
+${voffset -5}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==1'}
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==2'}
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==3' | sed /" $JOUR "/s/" $JOUR "/" "'${color #fa142f}'"$JOUR"'${color2}'" "/}
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==4' | sed /" $JOUR "/s/" $JOUR "/" "'${color #fa142f}'"$JOUR"'${color2}'" "/}  
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==5' | sed /" $JOUR "/s/" $JOUR "/" "'${color #fa142f}'"$JOUR"'${color2}'" "/}  
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==6' | sed /" $JOUR "/s/" $JOUR "/" "'${color #fa142f}'"$JOUR"'${color2}'" "/}  
+${voffset -3}${offset 156}${color2}${execpi 60 JOUR=`date +%e`; cal | awk 'NR==7' | sed /" $JOUR "/s/" $JOUR "/" "'${color #fa142f}'"$JOUR"'${color2}'" "/}  
+
+#..: CPU USAGE :..
+#--- if you use a multi-core system, change values ---
+#--- in this case, you may cange position of objects (offset, voffset) ---
+${color d7d7d7}${offset 91}${voffset 3}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${voffset -12}${offset 130}${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-26}
+${voffset -5}${offset 125}${cpubar cpu6 0, 200}${voffset 2}${color1}
+${voffset -5}${offset 155}Cpu1 ${goto 195}${cpu cpu1}% ${goto 225}(${freq 1} MHz)
+${offset 155}Cpu2 ${goto 195}${cpu cpu2}% ${goto 225}(${freq 2} MHz)
+${offset 155}Cpu3 ${goto 195}${cpu cpu3}% ${goto 225}(${freq 3} MHz)
+${offset 155}Cpu4 ${goto 195}${cpu cpu4}% ${goto 225}(${freq 4} MHz)
+#${offset 155}CpuT ${goto 195}${hwmon 1 temp 1} °C
+
+# ${offset 200}${voffset -5}${cpubar cpu6 0, 110}${voffset 2}${color1} °C
+# ${offset 200}CpuT  ${execi 20 sensors | grep "high" | cut -d "+" -f2 | cut -c1-4 } ${font UbuntuMono Nerd Font Mono}°C ${font}
+#${offset 200}CpuT  ${execi 20 sensors | grep "100" | cut -d "+" -f2 | cut -c1-4 } °C
+
+${color d7d7d7}${offset 101}${voffset 7}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${voffset -13}${offset 170}GeForce GTX 1070
+#${exec nvidia-smi --query-gpu=name --format=csv,noheader}
+${voffset -5}${offset 144}${cpubar cpu6 0, 182}${voffset 2}${color1}
+${voffset -8}${goto 165}Gpu   ${nvidia gpuutil} %
+#${exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
+#${goto 165}GpuT: ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
+#${goto 165}VRAM: ${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader} / ${exec nvidia-smi --query-gpu=memory.total --format=csv,noheader}
+${goto 165}VRAM  ${nvidia membwutil} %
+
+#..: HARD DISK :..
+#--- correct to your partitions ---
+${voffset -12}${color d7d7d7}${offset 100}${voffset 40}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
+${voffset -13}${offset 180}Disk/memory usage
+${voffset -5}${offset 144}${cpubar cpu6 0, 200}${voffset 2}${color1}
+${offset 170}RAM    $mem / $memmax
+${offset 170}/      ${fs_free /} / ${fs_size /}
+${offset 170}/data  ${fs_free /data} / ${fs_size /data}
+
+
+
+
+
+
+
+
+
