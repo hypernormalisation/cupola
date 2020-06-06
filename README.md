@@ -3,8 +3,8 @@
 Dotfiles for an i3-driven Arch Linux desktop environment.
 
 <p float="left">
-  <img src="/cupola_desktop.png" width="100" />
-  <img src="/cupola_apps.png" width="100" /> 
+  <img src="/cupola_desktop.png" width="400" />
+  <img src="/cupola_apps.png" width="400" /> 
 </p>
 
 ## Requirements
