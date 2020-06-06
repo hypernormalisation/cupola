@@ -105,14 +105,15 @@ ${offset 155}Cpu4 ${goto 195}${cpu cpu4}% ${goto 225}(${freq 4} MHz)
 #${offset 200}CpuT  ${execi 20 sensors | grep "100" | cut -d "+" -f2 | cut -c1-4 } °C
 
 ${color d7d7d7}${offset 101}${voffset 7}${cpugraph cpu6 17,1}${voffset -3}${hr 2}${color3}
-${voffset -13}${offset 170}GeForce GTX 1070
-#${exec nvidia-smi --query-gpu=name --format=csv,noheader}
+#${voffset -13}${offset 170}GeForce GTX 1070
+${voffset -13}${offset 170}${exec nvidia-smi --query-gpu=name --format=csv,noheader}
 ${voffset -5}${offset 144}${cpubar cpu6 0, 182}${voffset 2}${color1}
-${voffset -8}${goto 165}Gpu   ${nvidia gpuutil} %
+${voffset -8}${goto 195}Gpu   ${nvidia gpuutil} %
 #${exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
-#${goto 165}GpuT: ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
+#${goto 175}GpuT: ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
 #${goto 165}VRAM: ${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader} / ${exec nvidia-smi --query-gpu=memory.total --format=csv,noheader}
-${goto 165}VRAM  ${nvidia membwutil} %
+${goto 195}VRAM  ${nvidia membwutil} %
+
 
 #..: HARD DISK :..
 #--- correct to your partitions ---
@@ -121,7 +122,6 @@ ${voffset -13}${offset 180}Disk/memory usage
 ${voffset -5}${offset 144}${cpubar cpu6 0, 200}${voffset 2}${color1}
 ${offset 170}RAM    $mem / $memmax
 ${offset 170}/      ${fs_free /} / ${fs_size /}
-${offset 170}/data  ${fs_free /data} / ${fs_size /data}
 
 
 
