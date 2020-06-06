@@ -9,7 +9,7 @@ Dotfiles for an i3-driven Arch Linux desktop environment.
 
 ## Requirements
 
-### Arch repos
+### Arch repositories
 The following packages are required from the standard Arch repositories:
 
 - `i3-gaps`: fork of the tiling based window manager i3 with support for gaps between windows, and other features.
@@ -76,8 +76,8 @@ Contents in sddm go in /etc/sddm.conf.d dir.
 
 ## Recommended Apps
 
-<under construction>
+Under construction.
 
 ## Usage
 
-<under construction>
+Under construction.
