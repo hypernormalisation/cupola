@@ -1,0 +1,256 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = #00e60053
+background-alt = #444
+foreground = #e9e9f4
+foreground-alt = #555
+primary = #282936
+secondary = #e60053
+alert = #bd2c40
+
+[bar/taskbar]
+width = 100%
+height = 27
+radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 4
+line-color = #f00
+
+border-size = 1
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = "UbuntuMono Nerd Font Mono:size=15;1"
+
+modules-left = applications
+# modules-center = cpu temperature memory filesystem
+modules-right = pulseaudio eth date
+
+tray-position = right
+tray-padding = 2
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/applications]
+type = custom/text
+content-padding = 2
+content = Applications
+click-left = "rofi -show drun >/dev/null 2>&1 &"
+# click-left = "jgmenu >/dev/null 2>&1 &"
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+# label-mounted = �%mountpoint%%{F-} %percentage_used%%
+label-mounted = %mountpoint%: %percentage_free%% of %total%
+#format-underline = #c413d1
+
+[module/mpd]
+host = 127.0.0.1
+port = 6600
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+label-song = 𝄞 %artist% - %title%
+
+#; Available tokens:
+#;   %elapsed%
+#;   %total%
+#; Default: %elapsed% / %total%
+#;label-time = %elapsed% / %total%
+
+#; Available tokens:
+#;   None
+#label-offline = 🎜 mpd is offline
+
+#; Only applies if <icon-X> is used
+#icon-play = ⏵
+#icon-pause = ⏸
+#icon-stop = ⏹
+#icon-prev = ⏮
+#icon-next = ⏭
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+
+#; Used to display the state of random/repeat/repeatone/single
+#; Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+#format-underline = #f50a4d
+label = CPU %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+#format-underline = #f5d51a
+label = RAM %percentage_used%%
+
+[module/eth]
+type = internal/network
+interface = enp0s31f6
+interval = 3.0
+
+#format-connected-underline = #55aa55
+format-connected-prefix = " "
+# format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+label-disconnected =  %ifname%
+
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = " %d-%m-%Y"
+time = %H:%M:%S
+
+format-prefix-foreground = ${colors.foreground-alt}
+#format-underline = #0a6cf5
+#label =  %date% %time%
+label =  %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+
+format-volume = <label-volume> <bar-volume>
+format-muted = <label-muted> <bar-volume>
+label-volume =  %percentage:2%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = ﱝ %percentage:2%%
+
+bar-volume-width = 8
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+#format-underline = #f50a4d
+#format-warn = <ramp> <label-warn>
+#format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+# ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+#label-open-foreground = ${colors.secondary}
+label-close = Cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = ﰇ
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = ﰇ
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5

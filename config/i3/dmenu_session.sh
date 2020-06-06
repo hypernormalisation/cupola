@@ -1,6 +1,6 @@
 #!/bin/bash
 
-res=$(rofi -m 1 -dmenu < /home/sogilvy/.config/i3/dmenu-i3exit)
+res=$(rofi -m 1 -dmenu < $HOME/.config/i3/dmenu-i3exit)
 
 if [ $res = "logout" ]; then
     i3-msg exit

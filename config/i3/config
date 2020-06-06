@@ -16,7 +16,7 @@ exec_always --no-startup-id $HOME/.config/conky/startup.sh
 exec_always --no-startup-id picom -b
 
 # Set desktop background
-exec_always --no-startup-id feh --bg-center --no-fehbg --image-bg '#29082f' /home/sogilvy/Pictures/pacwall.png
+exec_always --no-startup-id feh --bg-center --no-fehbg --image-bg '#29082f' $HOME/Pictures/pacwall.png
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -120,7 +120,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Escape exec /home/sogilvy/.config/i3/dmenu_session.sh
+bindsym $mod+Escape exec $HOME/.config/i3/dmenu_session.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -148,4 +148,4 @@ for_window [class="^.*"] border pixel 0
 
 gaps inner 5
 gaps outer 0
-# smart_borders on
+smart_borders on

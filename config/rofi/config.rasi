@@ -8,4 +8,4 @@ configuration {
  font:                           "Ubuntu 13";
  combi-modi: "window,drun,ssh";
  }
-@import "/home/sogilvy/.config/rofi/sidebar.rasi"
+@import "sidebar.rasi"
