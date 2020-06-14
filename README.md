@@ -21,6 +21,7 @@ The following packages are required from the standard Arch repositories:
 - `sddm`: display manager from the KDE Plasma desktop.
 - `ttf-ubuntu-font-family`: ubuntu TrueType fonts.
 - `pulseaudio`: general purpose sound server, required for polybar volume control
+- `physlock`: application to lock the X screen and all ttys.
 
 To install:
 ```bash
@@ -34,6 +35,8 @@ The following packages are required from the Arch User Repository (AUR):
 - `tela-icon-theme`: flat and simple icon pack, with light and dark themes.
 - `pacwall-git`: utility to make a dependency graph for pacman and set it as your desktop background.
 - `termite-style-git`: command-line utility to change the theme and font of termite.
+- `xidlehook`: utility to automatically lock the screen after a timer. Can prevent locking when audio is played
+or an application is fullscreen.
 
 To install with an AUR helper, e.g. `yay`:
 ```bash
